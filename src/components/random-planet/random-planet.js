@@ -8,6 +8,7 @@ export default class RandomPlanet extends React.Component {
     state = {
         planet: {},
         loading: true,
+        error: false,
     };
 
     constructor() {
@@ -18,22 +19,26 @@ export default class RandomPlanet extends React.Component {
     onPlanetLoaded = (planet) => {
         this.setState({ planet, loading: false });
     }
+    onError = (error) => {
+        this.setState({ error: true, loading: false });
+    }
 
     updatePlanet() {
         const id = 12;
         this.swapi.getPlanet(id)
-            .then(this.onPlanetLoaded);
+            .then(this.onPlanetLoaded)
+            .catch(this.onError);
     }
 
     render() {
         this.updatePlanet();
-        const { planet, loading } = this.state;
+        const { planet, loading, error } = this.state;
         console.log('//////////', this.state.planet);
         return (
             <div className="card">
-                {loading ? <Spinner />
-                    : <PlanetView planet={planet}
-                        text={loading} />
+                {loading && !error ? <Spinner />
+                    : !error ? <PlanetView planet={planet} />
+                        : <div>Нет данных</div>
                 }
             </div>
         )
