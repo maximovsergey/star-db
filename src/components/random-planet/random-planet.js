@@ -1,11 +1,13 @@
 import React from 'react';
 import './random-planet.css';
-import SwapiService from '../../services/swapi-service'
+import SwapiService from '../../services/swapi-service';
+import Spinner from '../spinner/spinner';
 
 export default class RandomPlanet extends React.Component {
     swapi = new SwapiService();
     state = {
         planet: {},
+        loading: true,
     };
 
     constructor() {
@@ -14,7 +16,7 @@ export default class RandomPlanet extends React.Component {
     }
     // function
     onPlanetLoaded = (planet) => {
-        this.setState({ planet });
+        this.setState({ planet, loading: false });
     }
 
     updatePlanet() {
@@ -25,29 +27,33 @@ export default class RandomPlanet extends React.Component {
 
     render() {
         this.updatePlanet();
-        const { planet: { id, planetName, population, rotationPeriod, diameter } } = this.state;
+        const { planet: { id, planetName, population, rotationPeriod, diameter }, loading } = this.state;
+        console.log('//////////', this.state.planet);
         return (
             <div className="card">
-                <div className="image">
-                    <img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
-                        className="image"
-                    />
-
-                </div>
-                <div className="planetData">
-                    <div className="planetName">
-                        {planetName}
+                {loading ? <Spinner />
+                    : <div>
+                        <div className="image">
+                            <img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+                                className="image"
+                            />
+                        </div>
+                        <div className="planetData">
+                            <div className="planetName">
+                                {planetName}
+                            </div>
+                            <div>
+                                Население: {population}
+                            </div>
+                            <div>
+                                Период врашения: {rotationPeriod}
+                            </div>
+                            <div>
+                                Диаметр: {diameter}
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        Население: {population}
-                    </div>
-                    <div>
-                        Период врашения: {rotationPeriod}
-                    </div>
-                    <div>
-                        Диаметр: {diameter}
-                    </div>
-                </div>
+                }
             </div>
         )
     }
