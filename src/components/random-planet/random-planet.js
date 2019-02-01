@@ -27,34 +27,44 @@ export default class RandomPlanet extends React.Component {
 
     render() {
         this.updatePlanet();
-        const { planet: { id, planetName, population, rotationPeriod, diameter }, loading } = this.state;
+        const { planet, loading } = this.state;
         console.log('//////////', this.state.planet);
         return (
             <div className="card">
                 {loading ? <Spinner />
-                    : <div>
-                        <div className="image">
-                            <img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
-                                className="image"
-                            />
-                        </div>
-                        <div className="planetData">
-                            <div className="planetName">
-                                {planetName}
-                            </div>
-                            <div>
-                                Население: {population}
-                            </div>
-                            <div>
-                                Период врашения: {rotationPeriod}
-                            </div>
-                            <div>
-                                Диаметр: {diameter}
-                            </div>
-                        </div>
-                    </div>
+                    : <PlanetView planet={planet}
+                        text={loading} />
                 }
             </div>
         )
     }
+}
+
+const PlanetView = ({ planet }) => {
+    const { id, planetName, population, rotationPeriod, diameter } = planet;
+    return (
+        <React.Fragment>
+            <div>
+                <div className="image">
+                    <img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+                        className="image"
+                    />
+                </div>
+                <div className="planetData">
+                    <div className="planetName">
+                        {planetName}
+                    </div>
+                    <div>
+                        Население: {population}
+                    </div>
+                    <div>
+                        Период врашения: {rotationPeriod}
+                    </div>
+                    <div>
+                        Диаметр: {diameter}
+                    </div>
+                </div>
+            </div>
+        </React.Fragment>
+    )
 }
