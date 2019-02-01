@@ -1,0 +1,23 @@
+.card{
+    margin-bottom: 10px;
+    width: 600px;
+    width: 100%;
+    height: 150px;
+    display: table;
+    table-layout: fixed;
+}
+
+.image{
+    width: 150px;
+    height: 150px;
+    float: left;
+}
+.planetData{
+    margin-left: 50px;
+    float: left;
+    width: 50%;
+    display:table-column;
+}
+.planetName{
+    font-size: 20px;
+}
