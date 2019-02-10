@@ -40,7 +40,7 @@ export default class SwapiService {
         return id;
     }
 
-    _transformPlanet(planet) {
+    _transformPlanet = (planet) => {
         return {
             id: this._extractId(planet),
             planetName: planet.name,
@@ -49,7 +49,7 @@ export default class SwapiService {
             diameter: planet.diameter,
         }
     }
-    _transformStarShip(starShip) {
+    _transformStarShip = (starShip) => {
         return {
             id: this._extractId(starShip),
             name: starShip.name,
@@ -62,13 +62,14 @@ export default class SwapiService {
             cargoCapacity: starShip.cargoCapacity,
         }
     }
-    _transformPerson(person) {
+    _transformPerson = (person) => {
+        console.log('////////// person ', person);
         return {
             id: this._extractId(person),
-            planetName: person.name,
+            name: person.name,
             gender: person.gender,
-            birthYear: person.rotation_period,
-            eyeColor: person.eyeColor,
+            birthYear: person.birth_year,
+            eyeColor: person.eye_color,
         }
     }
 }
