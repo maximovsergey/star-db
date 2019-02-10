@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
 import './random-planet.css';
 import SwapiService from '../../services/swapi-service';
@@ -36,7 +37,7 @@ export default class RandomPlanet extends React.Component {
         // this.updatePlanet();
         const { planet, loading, error } = this.state;
         return (
-            <div>
+            <div style={{ marginTop: '20px' }}>
                 {loading && !error ? <Spinner />
                     : !error ? <PlanetView planet={planet} />
                         : <div>Нет данных</div>

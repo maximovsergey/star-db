@@ -10,11 +10,13 @@ export default class App extends React.Component {
     state = {
         showRandomPlanet: true,
         selectedPerson: null,
+        isLoading: false,
     }
 
     onPersonSelected = (id) => {
         this.setState({
             selectedPerson: id,
+            isLoading: true,
         });
     }
 
@@ -28,6 +30,7 @@ export default class App extends React.Component {
                     />
                     <PersonDetails
                         personId={this.state.selectedPerson}
+                        isLoading={this.state.isLoading}
                     />
                 </div>
             </div>
